@@ -7,7 +7,7 @@ class UsersApi
   end
 
   def create(user)
-    @client.request(:post, "/usuarios", body: user)
+    @client.request(:post, '/usuarios', body: user)
   end
 
   def find(id)
@@ -15,7 +15,7 @@ class UsersApi
   end
 
   def list(params = {})
-    @client.request(:get, "/usuarios", params: params)
+    @client.request(:get, '/usuarios', params: params)
   end
 
   def delete(id)

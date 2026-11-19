@@ -5,7 +5,7 @@ class CartPage < BasePage
   CHECKOUT  = { css: "[data-test='checkout']" }.freeze
 
   def produtos
-    @wait.until { current_path == "/cart.html" }
+    @wait.until { current_path == '/cart.html' }
     find_all(ITEM_NAME).map(&:text)
   end
 

@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 class LoginPage < BasePage
-  USERNAME = { id: "user-name" }.freeze
-  PASSWORD = { id: "password" }.freeze
-  SUBMIT   = { id: "login-button" }.freeze
+  USERNAME = { id: 'user-name' }.freeze
+  PASSWORD = { id: 'password' }.freeze
+  SUBMIT   = { id: 'login-button' }.freeze
   ERROR    = { css: "[data-test='error']" }.freeze
 
   def abrir
-    visit("/")
+    visit('/')
   end
 
   def entrar(username:, password:)

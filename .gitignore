@@ -3,3 +3,5 @@ reports/
 .bundle/
 vendor/
 *.log
+.idea/
+.vscode/

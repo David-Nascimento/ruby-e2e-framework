@@ -8,7 +8,7 @@ class ServerestLoginPage < ServerestPage
   ALERT    = { css: ".alert, [role='alert']" }.freeze
 
   def abrir
-    visit("/login")
+    visit('/login')
   end
 
   def entrar(email:, password:)

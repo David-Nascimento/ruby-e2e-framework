@@ -24,10 +24,10 @@ module DriverFactory
 
   def chrome_options
     options = Selenium::WebDriver::Chrome::Options.new
-    options.add_argument("--headless=new") if Config.headless?
-    options.add_preference("credentials_enable_service", false)
-    options.add_preference("profile.password_manager_enabled", false)
-    options.add_preference("profile.password_manager_leak_detection", false)
+    options.add_argument('--headless=new') if Config.headless?
+    options.add_preference('credentials_enable_service', false)
+    options.add_preference('profile.password_manager_enabled', false)
+    options.add_preference('profile.password_manager_leak_detection', false)
     %w[--window-size=1920,1080 --no-sandbox --disable-dev-shm-usage --disable-gpu].each do |arg|
       options.add_argument(arg)
     end
@@ -36,7 +36,7 @@ module DriverFactory
 
   def firefox_options
     options = Selenium::WebDriver::Firefox::Options.new
-    options.add_argument("-headless") if Config.headless?
+    options.add_argument('-headless') if Config.headless?
     options
   end
 end

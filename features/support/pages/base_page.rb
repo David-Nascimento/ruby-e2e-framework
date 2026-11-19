@@ -11,7 +11,7 @@ class BasePage
     Config.base_url
   end
 
-  def visit(path = "")
+  def visit(path = '')
     @driver.navigate.to("#{base_url}#{path}")
   end
 

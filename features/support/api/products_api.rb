@@ -7,11 +7,11 @@ class ProductsApi
   end
 
   def create(product, token:)
-    @client.request(:post, "/produtos", body: product, token: token)
+    @client.request(:post, '/produtos', body: product, token: token)
   end
 
   def list(params = {})
-    @client.request(:get, "/produtos", params: params)
+    @client.request(:get, '/produtos', params: params)
   end
 
   def delete(id, token:)

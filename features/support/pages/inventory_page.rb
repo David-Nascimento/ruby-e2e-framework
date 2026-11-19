@@ -6,7 +6,7 @@ class InventoryPage < BasePage
   CART_LINK  = { css: "[data-test='shopping-cart-link']" }.freeze
 
   def carregada?
-    text_of(TITLE) == "Products"
+    text_of(TITLE) == 'Products'
   end
 
   def adicionar_produto(nome)
@@ -28,7 +28,7 @@ class InventoryPage < BasePage
   private
 
   def slug(nome)
-    nome.downcase.gsub(/\s+/, "-")
+    nome.downcase.gsub(/\s+/, '-')
   end
 
   def botao_adicionar(nome)

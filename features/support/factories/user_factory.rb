@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "securerandom"
+require 'securerandom'
 
 # Gera usuários válidos para a API. O sufixo aleatório evita colisão entre execuções e processos paralelos.
 module UserFactory

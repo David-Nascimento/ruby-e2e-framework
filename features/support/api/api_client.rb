@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require "faraday"
-require "json"
+require 'faraday'
+require 'json'
 
 # Cliente HTTP genérico. Devolve sempre um Response com status, body (Hash quando JSON) e headers.
 class ApiClient
@@ -18,7 +18,7 @@ class ApiClient
 
   def request(method, path, body: nil, params: nil, token: nil)
     headers = {}
-    headers["Authorization"] = token if token
+    headers['Authorization'] = token if token
     response = @conn.run_request(method, path, body, headers) do |req|
       req.params.update(params) if params
     end
@@ -29,7 +29,7 @@ class ApiClient
   private
 
   def log(method, path, response)
-    return unless ENV["API_LOG"] == "true"
+    return unless ENV['API_LOG'] == 'true'
 
     puts "[API] #{method.to_s.upcase} #{path} -> #{response.status} #{response.body.to_json[0, 300]}"
   end
