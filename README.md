@@ -24,15 +24,26 @@ Aplicação alvo padrão: [SauceDemo](https://www.saucedemo.com).
 ## Estrutura
 
 ```
-config/cucumber.yml          perfis: default, smoke, regression, ci
+config/
+  cucumber.yml               perfis: default, smoke, api, ui, a11y, regression, ci
+  a11y_baseline.yml          problemas de acessibilidade conhecidos (por página)
 features/
-  login/ checkout/           cenários .feature por domínio
+  login/ checkout/           UI (SauceDemo)
+  api/ hybrid/               API e UI + API (ServeRest)
+  accessibility/             acessibilidade (axe-core)
   step_definitions/          steps finos, sem lógica de tela
   support/
     config.rb                configuração via ENV
-    driver_factory.rb        criação do browser
+    driver_factory.rb        navegador local ou Selenium Grid
     env.rb hooks.rb world.rb setup, screenshot em falha, acesso aos pages
+    api/                     ApiClient (Faraday) e clients por recurso
+    factories/               geração de dados únicos
+    accessibility/           AxeRunner (axe-core)
     pages/                   Page Objects (BasePage + páginas)
+    cleanup.rb               limpeza de dados ao fim do cenário
+docker-compose.yml           Selenium Grid + testes
+.github/workflows/ci.yml     pipeline (pausado: disparo manual)
+CONTRIBUTING.md CHANGELOG.md
 ```
 
 ## Como rodar
