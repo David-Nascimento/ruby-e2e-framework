@@ -1,0 +1,13 @@
+# Perfis de execução: bundle exec cucumber -p <perfil>
+<%
+  # Garante a pasta de relatórios (ela é ignorada pelo git) e separa a saída por processo
+  # quando rodando em paralelo (parallel_tests define TEST_ENV_NUMBER: "", "2", "3"...).
+  require "fileutils"
+  FileUtils.mkdir_p("reports")
+  n = ENV["TEST_ENV_NUMBER"].to_s
+  common = "--require features --publish-quiet --tags 'not @wip'"
+%>
+default: <%= common %> --format pretty --format html --out reports/cucumber<%= n %>.html
+smoke: <%= common %> --tags @smoke --format pretty --format html --out reports/smoke<%= n %>.html
+regression: <%= common %> --tags @regression --format progress --format html --out reports/regression<%= n %>.html
+ci: <%= common %> --format progress --format html --out reports/cucumber<%= n %>.html --format AllureCucumber::CucumberFormatter --out reports/allure-results
