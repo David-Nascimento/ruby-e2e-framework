@@ -8,18 +8,19 @@ Funcionalidade: Carrinho e checkout
   Contexto:
     Dado que estou logado como usuário "padrão"
 
-  @smoke
+  @smoke @REQ-CART-001
   Cenário: Adicionar produto ao carrinho
     Quando adiciono o produto "Sauce Labs Backpack" ao carrinho
     Então o carrinho deve indicar 1 item
     E ao abrir o carrinho devo ver o produto "Sauce Labs Backpack"
 
+  @REQ-CART-002
   Cenário: Remover produto do carrinho
     Dado que adicionei o produto "Sauce Labs Bike Light" ao carrinho
     Quando removo o produto "Sauce Labs Bike Light" do carrinho
     Então o carrinho deve indicar 0 itens
 
-  @critical
+  @critical @REQ-CHECKOUT-001
   Cenário: Finalizar compra com sucesso
     Dado que adicionei o produto "Sauce Labs Onesie" ao carrinho
     Quando abro o carrinho e inicio o checkout

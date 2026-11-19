@@ -1,5 +1,11 @@
 # Ruby E2E Framework
 
+![Ruby](https://img.shields.io/badge/Ruby-3.3-CC342D?logo=ruby&logoColor=white)
+![Cucumber](https://img.shields.io/badge/Cucumber-9-23D96C?logo=cucumber&logoColor=white)
+![Selenium](https://img.shields.io/badge/Selenium-4-43B02A?logo=selenium&logoColor=white)
+![RuboCop](https://img.shields.io/badge/code%20style-RuboCop-000000)
+![Docker](https://img.shields.io/badge/Docker-ready-2496ED?logo=docker&logoColor=white)
+
 Framework de automação de testes E2E com **Ruby + Cucumber (Gherkin em português) + Selenium WebDriver + RSpec expectations**, usando Page Object Pattern.
 Aplicação alvo padrão: [SauceDemo](https://www.saucedemo.com).
 
@@ -59,7 +65,10 @@ Cenários `@hybrid` preparam os dados pela API e validam só o essencial na inte
 
 ## Convenções
 
-- Tags: `@smoke`, `@regression`, `@critical`, `@wip` (ignorada por padrão).
+Guia completo de contribuição, padrões e checklist de PR em [CONTRIBUTING.md](CONTRIBUTING.md).
+
+
+- Tags: `@smoke`, `@regression`, `@critical`, `@api`, `@hybrid`, `@wip` (ignorada por padrão) e `@REQ-<ÁREA>-<NNN>` para rastreabilidade de requisitos.
 - Steps só orquestram; seletores e interações ficam nos Page Objects.
 - Sem `sleep`: apenas esperas explícitas no `BasePage`.
 - Segredos e URLs por ambiente em `.env` (nunca versionado).

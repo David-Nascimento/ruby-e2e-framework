@@ -3,13 +3,14 @@
 Funcionalidade: Login no ServeRest (dados via API, validação pela interface)
   Os dados são preparados pela API (rápido e estável) e o teste valida só o que importa na UI.
 
-  @smoke
+  @smoke @REQ-HYB-AUTH-001
   Cenário: Administrador criado via API consegue entrar pela interface
     Dado que existe um usuário cadastrado via API
     E que estou na página de login do ServeRest
     Quando faço login no ServeRest com o usuário criado
     Então devo estar na home do administrador
 
+  @REQ-HYB-AUTH-002
   Cenário: Senha incorreta é recusada na interface
     Dado que existe um usuário cadastrado via API
     E que estou na página de login do ServeRest
