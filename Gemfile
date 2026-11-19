@@ -8,6 +8,7 @@ gem "rspec-expectations", "~> 3.13"
 gem "dotenv", "~> 3.1"
 gem "faker", "~> 3.4"
 gem "allure-cucumber", "~> 2.25"
+gem "faraday", "~> 2.12"
 
 group :development do
   gem "rake", "~> 13.2"

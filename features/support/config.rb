@@ -12,8 +12,22 @@ module Config
     ENV.fetch("BROWSER", "chrome").to_sym
   end
 
+  # Se definido, usa o Selenium Grid em vez do navegador local (ex.: http://localhost:4444/wd/hub)
+  def remote_url
+    url = ENV.fetch("REMOTE_URL", "").strip
+    url.empty? ? nil : url
+  end
+
   def headless?
     ENV.fetch("HEADLESS", "true") == "true"
+  end
+
+  def api_url
+    ENV.fetch("API_URL", "https://serverest.dev")
+  end
+
+  def serverest_ui_url
+    ENV.fetch("SERVEREST_UI_URL", "https://front.serverest.dev")
   end
 
   def timeout

@@ -44,6 +44,12 @@ GEM
     dotenv (3.2.0)
     faker (3.6.1)
       i18n (>= 1.8.11, < 2)
+    faraday (2.15.1)
+      faraday-net_http (>= 2.0, < 3.6)
+      json
+      logger
+    faraday-net_http (3.5.0)
+      net-http (~> 0.5)
     ffi (1.17.4-x64-mingw-ucrt)
     i18n (1.15.2)
       concurrent-ruby (~> 1.0)
@@ -58,6 +64,11 @@ GEM
     mime-types-data (3.2026.1103)
     mini_mime (1.1.5)
     multi_test (1.1.0)
+    net-http (0.10.0)
+      net-protocol (>= 0.3.0)
+      uri (>= 0.11.1)
+    net-protocol (0.4.0)
+      timeout
     parallel (1.28.0)
     parallel_tests (4.10.1)
       parallel
@@ -103,9 +114,11 @@ GEM
       ffi (~> 1.1)
       memoist3 (~> 1.0.0)
       win32ole
+    timeout (0.6.1)
     unicode-display_width (3.3.0)
       unicode-emoji (~> 4.3)
     unicode-emoji (4.3.0)
+    uri (1.1.2)
     websocket (1.2.11)
     win32ole (1.9.3)
 
@@ -117,6 +130,7 @@ DEPENDENCIES
   cucumber (~> 9.2)
   dotenv (~> 3.1)
   faker (~> 3.4)
+  faraday (~> 2.12)
   parallel_tests (~> 4.7)
   rake (~> 13.2)
   rspec-expectations (~> 3.13)

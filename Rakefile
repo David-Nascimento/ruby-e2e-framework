@@ -5,9 +5,19 @@ task :smoke do
   sh "bundle exec cucumber -p smoke"
 end
 
+desc "Roda só os testes de API (sem navegador)"
+task :api do
+  sh "bundle exec cucumber -p api"
+end
+
 desc "Roda a regressão completa"
 task :regression do
   sh "bundle exec cucumber -p regression"
+end
+
+desc "Roda tudo no Docker (Selenium Grid + testes)"
+task :docker do
+  sh "docker compose up --build --abort-on-container-exit --exit-code-from tests"
 end
 
 desc "Roda o RuboCop"

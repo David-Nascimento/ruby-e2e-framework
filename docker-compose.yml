@@ -1,0 +1,30 @@
+# Sobe o Selenium (Chromium) + os testes. Uso: docker compose up --build --abort-on-container-exit --exit-code-from tests
+# Ver o navegador ao vivo (noVNC): http://localhost:7900  (senha: secret)
+services:
+  selenium:
+    image: selenium/standalone-chromium:latest
+    shm_size: 2g
+    ports:
+      - "4444:4444"
+      - "7900:7900"
+    healthcheck:
+      test: ["CMD", "/opt/bin/check-grid.sh", "--host", "0.0.0.0", "--port", "4444"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  tests:
+    build: .
+    depends_on:
+      selenium:
+        condition: service_healthy
+    environment:
+      REMOTE_URL: http://selenium:4444/wd/hub
+      BROWSER: chrome
+      HEADLESS: "true"
+      BASE_URL: ${BASE_URL:-https://www.saucedemo.com}
+      API_URL: ${API_URL:-https://serverest.dev}
+      SERVEREST_UI_URL: ${SERVEREST_UI_URL:-https://front.serverest.dev}
+    volumes:
+      - ./reports:/app/reports
+    command: ["bundle", "exec", "cucumber", "-p", "ci"]

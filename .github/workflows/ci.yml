@@ -7,6 +7,10 @@ on:
   schedule:
     - cron: "0 6 * * 1-5" # regressão noturna em dias úteis
 
+concurrency:
+  group: e2e-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -18,8 +22,25 @@ jobs:
           bundler-cache: true
       - run: bundle exec rubocop
 
-  e2e:
+  api:
     needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+          bundler-cache: true
+      - run: bundle exec cucumber -p api
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: reports-api
+          path: reports/
+          if-no-files-found: ignore
+
+  e2e:
+    needs: [lint, api]
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -46,3 +67,38 @@ jobs:
         with:
           name: reports-${{ matrix.browser }}
           path: reports/
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@v4
+        if: always() && github.event_name != 'pull_request'
+        with:
+          name: allure-results-${{ matrix.browser }}
+          path: reports/allure-results
+          if-no-files-found: ignore
+
+  report:
+    needs: e2e
+    if: always() && github.event_name != 'pull_request' && needs.e2e.result != 'skipped'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: allure-results-*
+          path: allure-results
+          merge-multiple: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Gera o relatório Allure
+        run: npx --yes allure-commandline generate allure-results --clean -o allure-report
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: allure-report
+      - id: deploy
+        uses: actions/deploy-pages@v4

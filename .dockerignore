@@ -1,0 +1,5 @@
+.git
+reports/
+.env
+vendor/
+.bundle/

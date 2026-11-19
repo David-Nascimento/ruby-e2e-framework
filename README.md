@@ -47,6 +47,16 @@ bundle exec rubocop                  # lint
 Relatórios em `reports/` (HTML, screenshots de falha e `allure-results`).
 Para ver o Allure: `allure serve reports/allure-results`.
 
+## Camada de API e dados de teste
+
+Cenários `@api` rodam sem navegador (`bundle exec cucumber -p api`) contra o [ServeRest](https://serverest.dev).
+Cenários `@hybrid` preparam os dados pela API e validam só o essencial na interface (`front.serverest.dev`).
+
+- `features/support/api/`: `ApiClient` (Faraday) + um client por recurso (`UsersApi`, `AuthApi`, `ProductsApi`).
+- `features/support/factories/`: geração de dados únicos (sufixo aleatório, seguro para paralelismo).
+- `features/support/cleanup.rb`: cada dado criado registra como ser desfeito; o hook `After` executa em ordem inversa.
+- `API_LOG=true` imprime cada requisição/resposta.
+
 ## Convenções
 
 - Tags: `@smoke`, `@regression`, `@critical`, `@wip` (ignorada por padrão).
@@ -54,9 +64,20 @@ Para ver o Allure: `allure serve reports/allure-results`.
 - Sem `sleep`: apenas esperas explícitas no `BasePage`.
 - Segredos e URLs por ambiente em `.env` (nunca versionado).
 
-## Docker
+## Docker / Selenium Grid
 
 ```bash
-docker build -t ruby-e2e .
-docker run --rm -v "$PWD/reports:/app/reports" ruby-e2e
+docker compose up --build --abort-on-container-exit --exit-code-from tests
+# ou: bundle exec rake docker
 ```
+
+Sobe o Selenium (Chromium) e os testes em containers; os relatórios ficam em `./reports`.
+Para assistir ao navegador ao vivo, abra http://localhost:7900 (senha `secret`).
+Também dá para usar o Grid com os testes locais: suba só o grid (`docker compose up selenium`) e rode
+`REMOTE_URL=http://localhost:4444/wd/hub bundle exec cucumber -p smoke`.
+
+## Relatório Allure no GitHub Pages
+
+O workflow `E2E` publica o relatório Allure a cada push na `main` e na execução agendada.
+Configuração única: no repositório, **Settings → Pages → Source: GitHub Actions**.
+O relatório fica em `https://<usuario>.github.io/<repositorio>/`.

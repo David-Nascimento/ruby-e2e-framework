@@ -7,8 +7,12 @@ class BasePage
     @wait = Selenium::WebDriver::Wait.new(timeout: Config.timeout, interval: 0.2)
   end
 
+  def base_url
+    Config.base_url
+  end
+
   def visit(path = "")
-    @driver.navigate.to("#{Config.base_url}#{path}")
+    @driver.navigate.to("#{base_url}#{path}")
   end
 
   def current_path

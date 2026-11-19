@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-Before do
+# Cenários @api não abrem navegador
+Before("not @api") do
   @driver = DriverFactory.build
   @driver.manage.timeouts.page_load = 30
 end
@@ -15,4 +16,9 @@ After do |scenario|
   end
 ensure
   @driver&.quit
+end
+
+# Desfaz os dados criados pelo cenário (ordem inversa), passando ou falhando
+After do
+  cleanup.run!
 end
