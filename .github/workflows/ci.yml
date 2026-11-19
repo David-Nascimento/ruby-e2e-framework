@@ -1,11 +1,16 @@
 name: E2E
 
+# CI pausado: só roda manualmente (aba Actions > E2E > Run workflow).
+# Para reativar quando a conta for liberada, troque este bloco pelo comentado abaixo.
 on:
-  pull_request:
-  push:
-    branches: [main]
-  schedule:
-    - cron: "0 6 * * 1-5" # regressão noturna em dias úteis
+  workflow_dispatch:
+# on:
+#   pull_request:
+#   push:
+#     branches: [main]
+#   schedule:
+#     - cron: "0 6 * * 1-5" # regressão noturna em dias úteis
+#   workflow_dispatch:
 
 concurrency:
   group: e2e-${{ github.ref }}
