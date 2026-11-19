@@ -8,6 +8,7 @@ class LoginPage < BasePage
 
   def abrir
     visit('/')
+    find(USERNAME) # aguarda a SPA renderizar
   end
 
   def entrar(username:, password:)

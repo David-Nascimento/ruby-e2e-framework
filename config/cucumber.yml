@@ -11,5 +11,6 @@ default: <%= common %> --format pretty --format html --out reports/cucumber<%= n
 smoke: <%= common %> --tags @smoke --format pretty --format html --out reports/smoke<%= n %>.html
 api: <%= common %> --tags @api --format progress --format html --out reports/api<%= n %>.html
 ui: <%= common %> --tags 'not @api' --format pretty --format html --out reports/ui<%= n %>.html
+a11y: <%= common %> --tags @a11y --format pretty --format html --out reports/a11y<%= n %>.html
 regression: <%= common %> --tags @regression --format progress --format html --out reports/regression<%= n %>.html
 ci: <%= common %> --format progress --format html --out reports/cucumber<%= n %>.html --format AllureCucumber::CucumberFormatter --out reports/allure-results

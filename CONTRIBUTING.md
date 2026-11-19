@@ -58,6 +58,7 @@ bundle exec rubocop              # lint (deve terminar com 0 offenses)
 | `@critical` | Funcionalidade cujo defeito é bloqueante. |
 | `@api` | Cenário sem navegador (só API). |
 | `@hybrid` | Dados via API + validação na interface. |
+| `@a11y` | Acessibilidade (axe-core, WCAG 2.1 A/AA). |
 | `@wip` | Em desenvolvimento. Ignorado por padrão. |
 | `@REQ-<ÁREA>-<NNN>` | Rastreabilidade: liga o cenário a um requisito (veja abaixo). |
 

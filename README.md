@@ -63,6 +63,19 @@ Cenários `@hybrid` preparam os dados pela API e validam só o essencial na inte
 - `features/support/cleanup.rb`: cada dado criado registra como ser desfeito; o hook `After` executa em ordem inversa.
 - `API_LOG=true` imprime cada requisição/resposta.
 
+## Acessibilidade (axe-core)
+
+Cenários `@a11y` rodam o [axe-core](https://github.com/dequelabs/axe-core) nas telas principais (WCAG 2.1 A/AA) e falham
+se houver violação do nível pedido ou pior (`crítico`, `sério`, `moderado`, `leve`).
+
+```bash
+bundle exec rake a11y         # ou: bundle exec cucumber -p a11y
+```
+
+- O relatório completo de cada tela (regra, impacto, elementos, link de correção) é anexado ao cenário no HTML.
+- O `axe.min.js` é baixado uma vez para `tmp/` (use `AXE_JS_PATH` para um arquivo local).
+- Problemas já conhecidos e aceitos vão em `config/a11y_baseline.yml`, por página, com o motivo documentado.
+
 ## Convenções
 
 Guia completo de contribuição, padrões e checklist de PR em [CONTRIBUTING.md](CONTRIBUTING.md).

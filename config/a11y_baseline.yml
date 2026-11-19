@@ -1,0 +1,8 @@
+# Baseline de acessibilidade: regras do axe já conhecidas, por caminho da página.
+# Use com parcimônia e documente o motivo: o ideal é corrigir o problema, não escondê-lo.
+# Ao corrigir a causa, remova a entrada para o teste voltar a proteger a tela.
+
+# Tela de login do ServeRest (app de terceiros, front.serverest.dev): não temos como corrigir.
+# Identificado em 2026-11-19. Também há 'color-contrast' (nível sério), que não derruba o cenário no nível crítico.
+/login:
+  - image-alt   # imagem sem texto alternativo

@@ -10,6 +10,11 @@ task :api do
   sh 'bundle exec cucumber -p api'
 end
 
+desc 'Roda os testes de acessibilidade (axe-core)'
+task :a11y do
+  sh 'bundle exec cucumber -p a11y'
+end
+
 desc 'Roda a regressão completa'
 task :regression do
   sh 'bundle exec cucumber -p regression'

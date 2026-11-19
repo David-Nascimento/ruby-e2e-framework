@@ -9,6 +9,7 @@ class ServerestLoginPage < ServerestPage
 
   def abrir
     visit('/login')
+    find(EMAIL) # aguarda a SPA renderizar
   end
 
   def entrar(email:, password:)
